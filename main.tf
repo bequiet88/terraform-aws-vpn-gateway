@@ -17,7 +17,7 @@ resource "aws_vpn_connection" "default" {
 }
 
 ### Tunnel Inside CIDR only
-resource "aws_vpn_connection" "default" {
+resource "aws_vpn_connection" "tunnel" {
   count                 = "${var.create_vpn_connection && length(var.tunnel1_inside_cidr) > 0 && length(var.tunnel2_inside_cidr) > 0 ? 1 : 0}"
 
   vpn_gateway_id        = "${var.vpn_gateway_id}"
@@ -38,7 +38,7 @@ resource "aws_vpn_connection" "default" {
 }
 
 ### Preshared Key only
-resource "aws_vpn_connection" "default" {
+resource "aws_vpn_connection" "preshared" {
   count                 = "${var.create_vpn_connection && length(var.tunnel1_preshared_key) > 0 && length(var.tunnel2_preshared_key) > 0 ? 1 : 0}"
 
   vpn_gateway_id        = "${var.vpn_gateway_id}"
@@ -59,7 +59,7 @@ resource "aws_vpn_connection" "default" {
 }
 
 ### Tunnel Inside CIDR and Preshared Key
-resource "aws_vpn_connection" "default" {
+resource "aws_vpn_connection" "tunnel_preshared" {
   count                 = "${var.create_vpn_connection && length(var.tunnel1_inside_cidr) > 0 && length(var.tunnel2_inside_cidr) > 0 && length(var.tunnel1_preshared_key) > 0 && length(var.tunnel2_preshared_key) > 0 ? 1 : 0}"
 
   vpn_gateway_id        = "${var.vpn_gateway_id}"
